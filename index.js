@@ -11,6 +11,7 @@ server.get('/webhook/', function (req, res) {
     res.send(req.query['hub.challenge']);
   }
   res.send('Error, wrong validation token');
+  return next();
 });
 
 server.post('/webhook/', function (req, res) {
@@ -47,7 +48,8 @@ server.post('/webhook/', function (req, res) {
     }  
   }
 
-  res.sendStatus(200);
+  res.send(200);
+  return next();
 });
 
 server.listen((process.env.PORT || 5000), function() {	
