@@ -16,7 +16,7 @@ server.get('/webhook/', function (req, res) {
 server.post('/webhook/', function (req, res) {
   console.log('Inside POST /webhook/');
   messaging_events = req.body.entry[0].messaging;
-  console.log('event '+messaging_events.length);
+  console.log('req body '+JSON.stringify(req.body));
   for (j = 0; j < messaging_events.length; j++) {
   	event = req.body.entry[0].messaging[j];
     console.log('event '+JSON.stringify(event));
