@@ -17,23 +17,27 @@ server.post('/webhook/', function (req, res) {
   console.log('Inside POST /webhook/');
   messaging_events = req.body.entry[0].messaging;
   console.log('event '+messaging_events.length);
+  for (j = 0; j < messaging_events.length; j++) {
+  	event = req.body.entry[0].messaging[j];
+    console.log('event '+JSON.stringify(event));
+  }
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
     console.log('event '+JSON.stringify(event));
     sender = event.sender.id;
     if (event.message && event.message.text) {
       console.log('Inside event message');
-      sendGenericMessage(sender);
+      //sendGenericMessage(sender);
       text = event.message.text;
       console.log('text '+text);
       if (text == 'Generic') {
       	console.log('Inside Generic '+text);
     	sendGenericMessage(sender);
-    	break;
-  	  }else if(text == 'Hi'){
+    	continue;
+  	  }else{
   	  	console.log('Inside Hi '+text);
         sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200)); 	
-        break;  	
+        continue;  	
   	  }
     }
     if (event.postback) {
