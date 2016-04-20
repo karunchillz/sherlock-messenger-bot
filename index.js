@@ -22,6 +22,7 @@ server.post('/webhook/', function (req, res) {
     console.log('event '+JSON.stringify(event));
     sender = event.sender.id;
     if (event.message && event.message.text) {
+      console.log('Inside event message');
       sendGenericMessage(sender);
       text = event.message.text;
       console.log('text '+text);
@@ -73,7 +74,7 @@ function sendTextMessage(sender, text) {
 }
 
 function sendGenericMessage(sender) {
-   console.log('Send Text Message'+text);
+   console.log('Send Generice Text Message');
   messageData = {
     "attachment": {
       "type": "template",
