@@ -15,11 +15,13 @@ server.get('/webhook/', function (req, res) {
 server.post('/webhook/', function (req, res) {
   console.log('Inside POST /webhook/');
   messaging_events = req.body.entry[0].messaging;
+  console.log('event '+messaging_events.length);
   for (i = 0; i < messaging_events.length; i++) {
-  	console.log('event '+event);
     event = req.body.entry[0].messaging[i];
+    console.log('event ');
     sender = event.sender.id;
     if (event.message && event.message.text) {
+      console.log('text ');
       text = event.message.text;
       sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
       // Handle a text message from this sender
