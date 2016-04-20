@@ -19,10 +19,11 @@ server.post('/webhook/', function (req, res) {
   console.log('event '+messaging_events.length);
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
-    console.log('event '+event);
+    console.log('event '+JSON.stringify(event));
     sender = event.sender.id;
     if (event.message && event.message.text) {
       console.log('text '+text);
+      sendGenericMessage(sender);
       text = event.message.text;
       if (text === 'Generic') {
     	sendGenericMessage(sender);
