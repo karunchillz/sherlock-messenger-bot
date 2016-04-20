@@ -10,7 +10,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "restify": "*"
+    "restify": "*",
+    "request": "*"
   },
   "keywords": [
     "node",
