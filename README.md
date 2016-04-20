@@ -1,1 +1,1 @@
-FB Bot Demo App
+fb-bot-getting-started
