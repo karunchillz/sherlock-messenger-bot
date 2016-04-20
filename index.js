@@ -22,17 +22,20 @@ server.post('/webhook/', function (req, res) {
     console.log('event '+JSON.stringify(event));
     sender = event.sender.id;
     if (event.message && event.message.text) {
-      console.log('text '+text);
       sendGenericMessage(sender);
       text = event.message.text;
-      if (text === 'Generic') {
+      console.log('text '+text);
+      if (text == 'Generic') {
+      	console.log('Inside Generic '+text);
     	sendGenericMessage(sender);
-    	continue;
-  	  }else if(text === 'Hi'){
-        sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200)); 	  	
+    	break;
+  	  }else if(text == 'Hi'){
+  	  	console.log('Inside Hi '+text);
+        sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200)); 	
+        break;  	
   	  }
     }
-    else if (event.postback) {
+    if (event.postback) {
     	text = JSON.stringify(event.postback);
     	sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
     	continue;
@@ -70,6 +73,7 @@ function sendTextMessage(sender, text) {
 }
 
 function sendGenericMessage(sender) {
+   console.log('Send Text Message'+text);
   messageData = {
     "attachment": {
       "type": "template",
