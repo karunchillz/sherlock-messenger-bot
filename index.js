@@ -34,7 +34,7 @@ server.post('/webhook/', function (req, res) {
       	console.log('Inside Generic '+text);
     	sendGenericMessage(sender);
     	continue;
-  	  }else{
+  	  }else if(text == 'Asdf'){
   	  	console.log('Inside Hi '+text);
         sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200)); 	
         continue;  	
