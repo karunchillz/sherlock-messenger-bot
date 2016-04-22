@@ -1,6 +1,7 @@
 var restify = require('restify');
 var request = require('request');
 var server = restify.createServer();
+var commerceUtility = require('./commerce/commerceUtility');
 
 var token = 'CAAO6UiNCn1MBACFaHgqZCnYMNhfkrBL5uFm16rZBBxtcNlw1j5kZA15yWab5TStnqoLnNNGkqsUrhv7FmPeoCUTA0l8dhZCc0oE4pRU2iKBdG0d3qcxUVeX1biRbhxLbtEi9Hh2DQ40wh2eBGQ4VcSZAmvhRLiMNkBkwusrNcqa6XeYzGAdPxMkWp4BWY9CIZD';
 //var token = "CAAInkXlV7uwBAEkeVh9pY6JrMXipvTXVOrP2GO7tdi0SLO8VaXvfgnyBuKSOoVzTd93HacICtwJZCbFD8x6WRQUsvOdf0m3ZC5j5o2wk9dMtoy8WRK6ZBzrajspAsyq3fFku1FH324R4SIwqL3fH5iZCGqjDAZCvHbsdxU4qrPfLnIwMnQUp3BfO0rR8c85S8obaUdtNVPgZDZD";
@@ -53,6 +54,12 @@ server.post('/webhook/', function (req, res) {
     if (event.postback) {
     	text = JSON.stringify(event.postback);
       console.log("product id that customer wants to buy = "+text);
+      var catentryId = text.split(' ')[2];
+      commerceUtility.loginUser();
+      commerceUtility.addToCart(catentryId);
+      commerceUtility.applyCheckoutProfile();
+      commerceUtility.preCheckout();
+      commerceUtility.checkout();
       const session_id = findOrCreateSession(sender);
       wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
           if (error) console.log(error);

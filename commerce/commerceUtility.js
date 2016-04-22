@@ -102,7 +102,7 @@ module.exports.preCheckout = function preCheckout() {
 };
 
 // Checkout
-module.exports.checkout = function checkout(sender, text) {
+module.exports.checkout = function checkout() {
   console.log('checkout ',orderId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart/@self/checkout?responseFormat=json',
