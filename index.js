@@ -103,8 +103,9 @@ function sendTextMessage(sender, text) {
   });
 }
 
-function sendGenericMessage(sender, categoryId) {
+function sendGenericMessage(sender) {
    console.log('Send Generice Text Message');
+
   /*messageData = {
     "attachment": {
       "type": "template",
@@ -137,7 +138,7 @@ function sendGenericMessage(sender, categoryId) {
     }
   };*/
 
-  messageData = {
+  /*messageData = {
     "attachment":{
       "type":"template",
       "payload":{
@@ -234,7 +235,9 @@ function sendGenericMessage(sender, categoryId) {
         ]
       }
     }
-  };
+  };*/
+
+  console.log("products = %o",commerceUtility.productsMap);
 
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -379,10 +382,10 @@ const actions = {
   sendDresses: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
     console.log("categoryId = %o",context.categoryId);
-    loginUser('',context.categoryId);
+    commerceUtility.loginUser('',context.categoryId);
     const sender = sessions[sessionId].fbid;
     console.log("sender = %o",sender);
-    sendGenericMessage(sender, context.categoryId);
+    sendGenericMessage(sender);
     cb(context);
   }, 
   sendReceipt: (sessionId, context, cb) => {
