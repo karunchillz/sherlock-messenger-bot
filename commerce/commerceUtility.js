@@ -12,10 +12,10 @@ module.exports.loginUser = function loginUser() {
       'Content-Type': 'application/json'
     },    
     method: 'POST',
-    body: {
+    body: '{
     	"logonId": "testing10@a.com",
 		"logonPassword": "testing10"
-    }
+    }'
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
@@ -36,7 +36,7 @@ module.exports.addToCart = function addToCart(catentryId) {
       'WCToken': WCToken
     },    
     method: 'POST',
-    body: {
+    body: '{
 		"orderId": ".",
 		"orderItem": [
 		{
@@ -46,7 +46,7 @@ module.exports.addToCart = function addToCart(catentryId) {
 	],
 	"x_calculateOrder": "0",
 	"x_inventoryValidation": "true"
-    }
+    }'
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
@@ -67,9 +67,9 @@ module.exports.applyCheckoutProfile = function applyCheckoutProfile() {
       'WCToken': WCToken
     },    
     method: 'PUT',
-    body: {
+    body: '{
 		"orderId": orderId
-    }
+    }'
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
@@ -89,9 +89,9 @@ module.exports.preCheckout = function preCheckout() {
       'WCToken': WCToken
     },    
     method: 'PUT',
-    body: {
+    body: '{
 		"orderId": orderId
-    }
+    }'
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
@@ -111,7 +111,7 @@ module.exports.checkout = function checkout() {
       'WCToken': WCToken
     },    
     method: 'POST',
-    body: {
+    body: '{
 		"catalogId": "10052",
 		"langId": "-1",
 		"notifyMerchant": "1",
@@ -121,7 +121,7 @@ module.exports.checkout = function checkout() {
 		"orderId": orderId,
 		"purchaseorder_id": "",
 		"storeId": "10851"
-	}
+	}'
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
