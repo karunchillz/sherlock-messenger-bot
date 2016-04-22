@@ -71,7 +71,7 @@ function getProducts(categoryId, sender){
     method: 'GET'
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success getProducts');
+      console.log('Success getProducts',body);
 		var catentryArray = body.CatalogEntryView;
 		for (var i = 0; i < 5; i++) {
 			productsMap.push({
