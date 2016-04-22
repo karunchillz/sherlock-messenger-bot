@@ -16,7 +16,7 @@ server.get('/webhook/', function (req, res) {
 });
 
 server.post('/webhook/', function (req, res) {
-  console.log('Inside POST /webhook/');
+  console.log('POST /webhook/');
   messaging_events = req.body.entry[0].messaging;
   console.log('req body '+JSON.stringify(req.body));
   for (j = 0; j < messaging_events.length; j++) {
@@ -139,8 +139,8 @@ function sendGenericMessage(sender) {
   });
 }
 
-const WIT_TOKEN = "KMG23FM4RVSUDOUJ2FB3V4GYZJADLIRJ";
-
+//const WIT_TOKEN = "KMG23FM4RVSUDOUJ2FB3V4GYZJADLIRJ";
+const WIT_TOKEN = "S7YRFBMNSY6JEJJTKO2EJKZ4SFJBQ4VT";
 const Wit = require('node-wit').Wit;
 const uuid = require('node-uuid');
 
