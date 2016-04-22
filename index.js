@@ -146,7 +146,7 @@ function sendGenericMessage(sender) {
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"10063"
+                "payload":"Buy now 10063"
               },
               {
                 "type":"postback",
@@ -168,7 +168,7 @@ function sendGenericMessage(sender) {
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"10207"
+                "payload":"Buy now 10207"
               },
               {
                 "type":"postback",
@@ -190,7 +190,7 @@ function sendGenericMessage(sender) {
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"10160"
+                "payload":"Buy now 10160"
               },
               {
                 "type":"postback",
@@ -212,7 +212,7 @@ function sendGenericMessage(sender) {
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"10184"
+                "payload":"Buy now 10184"
               },
               {
                 "type":"postback",
