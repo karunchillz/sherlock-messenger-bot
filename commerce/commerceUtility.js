@@ -209,39 +209,41 @@ function sendGenericMessage(sender) {
   console.log('Send Generice Text Message');
   
   console.log("products = %o",productsMap);
-
-  for(i=0;i<5;i++){
-    var messageData = {
+  
+  var messageData = {
       "attachment": {
         "type": "template",
         "payload": {
           "template_type": "generic",
-          "elements": [{
-
-            "title": productsMap[i].title,
-            "subtitle": productsMap[i].subtitle + "\n Price : $" + productsMap[i].price ,
-            "image_url": "",
-            "buttons":[
-                {
-                  "type":"postback",
-                  "title":"Change Specs",
-                  "payload":""+productsMap[i].id
-                },
-                {
-                  "type":"postback",
-                  "title":"Buy Now",
-                  "payload":"Buy now "+productsMap[i].id
-                },
-                {
-                  "type":"postback",
-                  "title":"View Details",
-                  "payload":""+productsMap[i].id
-                }              
-            ]
-          }]
+          "elements":[]
         }
       }
-    };
+  };
+
+  for(var i=0; i<5; i++){
+    var item = {
+      "title": productsMap[i].title,
+      "subtitle": productsMap[i].subtitle + "\n Price : $" + productsMap[i].price ,
+      "image_url": "",
+      "buttons":[
+          {
+            "type":"postback",
+            "title":"Change Specs",
+            "payload":""+productsMap[i].id
+          },
+          {
+            "type":"postback",
+            "title":"Buy Now",
+            "payload":"Buy now "+productsMap[i].id
+          },
+          {
+            "type":"postback",
+            "title":"View Details",
+            "payload":""+productsMap[i].id
+          }              
+      ]
+    }
+    messageData.attachment.payload.elements.push(item);
   }
 
   request({
