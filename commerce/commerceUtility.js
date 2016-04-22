@@ -72,7 +72,7 @@ function getProducts(categoryId, sender){
   }, function(error, response, body) {
     if (!error) {
       console.log('Success getProducts');
-		var catentryArray = body.CatalogEntryView;
+		var catentryArray = body.recordSetTotal;
     console.log('catentryArray',catentryArray);
 		for (var i = 0; i < 5; i++) {
       console.log('catentryArray[i].name'+catentryArray[i].name);
