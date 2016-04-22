@@ -1,7 +1,7 @@
 {
   "name": "fb-bot-getting-started",
   "version": "0.0.1",
-  "description": "A sample Node.js app using Restify",
+  "description": "A sample Node.js app using Restify for FB Bot",
   "engines": {
     "node": "*"
   },
