@@ -136,7 +136,8 @@ function sendGenericMessage(sender) {
           {
             "title":"Modern Half Sleeve T-Shirt (Amazon)",
             "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0015_a_teal.jpg",
-            "subtitle":"Tinted Men's Solid Henley Half Sleeve T-Shirt",
+            "subtitle":"Versatil Empire Waist Sundress",
+            "price":"$100.00",
             "buttons":[
               {
                 "type":"postback",
