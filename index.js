@@ -363,6 +363,7 @@ const actions = {
   },
   sendDresses: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
+    console.log("context = %o",context);
     const sender = sessions[sessionId].fbid;
     sendGenericMessage(sender);
     cb(context);

@@ -58,7 +58,7 @@ module.exports.addToCart = function addToCart(catentryId) {
 };
 
 // Apply Checkout Profile
-module.exports.applyCheckoutProfile = applyCheckoutProfile() {
+module.exports.applyCheckoutProfile = function applyCheckoutProfile() {
   console.log('applyCheckoutProfile ',orderId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart/@self/applyCheckoutProfile',
