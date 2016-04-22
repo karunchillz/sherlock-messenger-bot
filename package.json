@@ -11,11 +11,19 @@
   },
   "dependencies": {
     "restify": "*",
-    "request": "*"
+    "request": "*",
+    "node-uuid": "*"
   },
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "wit",
+    "wit.ai",
+    "bot",
+    "botengine",
+    "bots",
+    "nlp",
+    "automation"
   ]
 }
