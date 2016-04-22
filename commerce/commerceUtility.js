@@ -3,10 +3,17 @@ var querystring = require('querystring');
 
 var WCToken = '';
 var orderId = '';
+var productId = '';
+var productsMap = [];
 
 module.exports.orderId = orderId;
+
+module.exports.productId = productId;
+
+module.exports.productsMap = productsMap;
+
 // Login User
-module.exports.loginUser = function loginUser(catentryId) {
+module.exports.loginUser = function loginUser(catentryId,categoryId) {
   console.log('loginUser ',catentryId);
 
   var body = {
@@ -27,17 +34,57 @@ module.exports.loginUser = function loginUser(catentryId) {
 	      console.log('Success loginUser ');
 	      WCToken = body.WCToken;
 	      console.log('WCToken ',WCToken);
-	      addToCart(catentryId);
+	      if(catentryId == ''){
+    		getProducts(categoryId);
+	      }else{
+	      	productId = catentryId;
+	      	addToCart(catentryId);
+	      }
 	    } else {
 	      console.log('Error sending message: ', error);
 	    }
 	  });
   }else{
   	console.log('Else ');
-  	addToCart(catentryId);
+    if(catentryId == ''){
+    	getProducts(categoryId);
+    }else{
+      productId = catentryId;
+  	  addToCart(catentryId);
+    }
   }
 
+};
 
+//Get Category
+function getProducts(categoryId){
+
+  console.log('getCategory ',categoryId);
+  request({
+    url: 'http://182.71.233.89/wcs/resources/store/10851/productview/byCategory/'+categoryId,
+	headers: {
+      'Content-Type': 'application/json',
+      'WCToken': WCToken
+    },
+    method: 'GET'
+  }, function(error, response, body) {
+    if (!error) {
+      console.log('Success getProducts');
+		var catentryArray = body.CatalogEntryView;
+		for (var i = 0; i < 5; i++) {
+			productsMap.push({
+				title : catentryArray[i].name,
+				subtitle : catentryArray[i].shortDescription,
+				price : catentryArray[i].Price[0].priceValue,
+				image : 'http://182.71.233.89'+catentryArray[i].thumbnail,
+				id : catentryArray[i].uniqueID
+			});
+		}
+    } else {
+      console.log('Error sending message: ', error);
+    }
+  });	
+	
 };
 
 function addToCart(catentryId) {
