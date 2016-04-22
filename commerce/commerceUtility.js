@@ -22,8 +22,9 @@ module.exports.loginUser = function loginUser() {
     json: body
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success sending message: ', response);
+      console.log('Success loginUser ',body);
       WCToken = response.WCToken;
+      console.log('WCToken ',WCToken);
       addToCart(catentryId);
     } else {
       console.log('Error sending message: ', error);
@@ -53,8 +54,9 @@ function addToCart(catentryId) {
     }
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success sending message: ', response);
+      console.log('Success addToCart');
       orderId = response.orderId;
+      console.log('orderId ',orderId);
       applyCheckoutProfile();
     } else {
       console.log('Error sending message: ', error);
@@ -76,7 +78,7 @@ function applyCheckoutProfile() {
     }
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success sending message: ', response);
+      console.log('Success applyCheckoutProfile');
       preCheckout();
     } else {
       console.log('Error sending message: ', error);
@@ -98,7 +100,7 @@ function preCheckout() {
     }
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success sending message: ', response);
+      console.log('Success preCheckout'); 
       checkout();
     } else {
       console.log('Error sending message: ', error);
@@ -128,7 +130,7 @@ function checkout() {
 	}
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success sending message: ', response);
+      console.log('Success checkout');
     } else {
       console.log('Error sending message: ', error);
     }
