@@ -62,7 +62,7 @@ server.post('/webhook/', function (req, res) {
     	text = JSON.stringify(event.postback.payload).replace('"','').replace('"','');
       console.log("product id that customer wants to buy = "+text);
       var catentryId = text.split(' ')[2];
-      commerceUtility.loginUser(catentryId);
+      commerceUtility.loginUser(catentryId,'');
       const session_id = findOrCreateSession(sender);
       wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
           if (error) console.log(error);
@@ -379,6 +379,7 @@ const actions = {
   sendDresses: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
     console.log("categoryId = %o",context.categoryId);
+    loginUser('',context.categoryId);
     const sender = sessions[sessionId].fbid;
     console.log("sender = %o",sender);
     sendGenericMessage(sender, context.categoryId);

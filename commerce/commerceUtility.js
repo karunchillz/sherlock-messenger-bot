@@ -80,6 +80,7 @@ function getProducts(categoryId){
 				id : catentryArray[i].uniqueID
 			});
 		}
+		console.log('productsMap '+productsMap);
     } else {
       console.log('Error sending message: ', error);
     }
