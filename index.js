@@ -54,9 +54,9 @@ server.post('/webhook/', function (req, res) {
     	text = JSON.stringify(event.postback);
       console.log("text postback = "+text);
       const session_id = findOrCreateSession(sender);
-        wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
+      wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
           if (error) console.log(error);
-        });
+      });
       //sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
     	continue;
     }  
@@ -199,6 +199,76 @@ function sendGenericMessage(sender) {
   });
 }
 
+function sendReceiptTemplate(sender){
+  messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "receipt",
+        "recipient_name": "Stephane Crozatier",
+        "order_number": "12345678902",
+        "currency": "USD",
+        "payment_method": "Visa 2345",
+        "order_url": "http://petersapparel.parseapp.com/order?order_id=123456",
+        "timestamp": "1428444852",
+        "elements": [{
+          "title": "Classic White T-Shirt",
+          "subtitle": "100% Soft and Luxurious Cotton",
+          "quantity": 2,
+          "price": 50,
+          "currency": "USD",
+          "image_url": "http://petersapparel.parseapp.com/img/whiteshirt.png"
+        }, {
+          "title": "Classic Gray T-Shirt",
+          "subtitle": "100% Soft and Luxurious Cotton",
+          "quantity": 1,
+          "price": 25,
+          "currency": "USD",
+          "image_url": "http://petersapparel.parseapp.com/img/grayshirt.png"
+        }],
+        "address": {
+          "street_1": "1 Hacker Way",
+          "street_2": "",
+          "city": "Menlo Park",
+          "postal_code": "94025",
+          "state": "CA",
+          "country": "US"
+        },
+        "summary": {
+          "subtotal": 75.00,
+          "shipping_cost": 4.95,
+          "total_tax": 6.19,
+          "total_cost": 56.14
+        },
+        "adjustments": [{
+          "name": "New Customer Discount",
+          "amount": 20
+        }, {
+          "name": "$10 Off Coupon",
+          "amount": 10
+        }]
+      }
+    }
+  };
+
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+
+}
+
 //const WIT_TOKEN = "KMG23FM4RVSUDOUJ2FB3V4GYZJADLIRJ";
 const WIT_TOKEN = "S7YRFBMNSY6JEJJTKO2EJKZ4SFJBQ4VT";
 const Wit = require('node-wit').Wit;
@@ -244,6 +314,12 @@ const actions = {
     // Here should go the api call, e.g.:
     const sender = sessions[sessionId].fbid;
     sendGenericMessage(sender);
+    cb(context);
+  }, 
+  sendReceipt: (sessionId, context, cb) => {
+    // Here should go the api call, e.g.:
+    const sender = sessions[sessionId].fbid;
+    sendReceiptTemplate(sender);
     cb(context);
   }, 
   error: (sessionId, context, msg) => {
