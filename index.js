@@ -52,7 +52,7 @@ server.post('/webhook/', function (req, res) {
     }
     if (event.postback) {
     	text = JSON.stringify(event.postback);
-      console.log("text postback = "+text);
+      console.log("product id that customer wants to buy = "+text);
       const session_id = findOrCreateSession(sender);
       wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
           if (error) console.log(error);
@@ -135,45 +135,89 @@ function sendGenericMessage(sender) {
         "elements":[
           {
             "title":"Modern Half Sleeve T-Shirt (Amazon)",
-            "image_url":"http://ecx.images-amazon.com/images/I/41g-GBNzRZL._SL511_SX393_CR0,0,393,511_FMwebp_QL65_.jpg",
+            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0015_a_teal.jpg",
             "subtitle":"Tinted Men's Solid Henley Half Sleeve T-Shirt",
             "buttons":[
               {
-                "type":"web_url",
-                "url":"http://www.amazon.in/Tinted-Button-Cotton-T-Shirt-TJ106RH-ANTHERA-M_Grey_Medium/dp/B00ZUSO0EO/ref=sr_1_1?s=apparel&ie=UTF8&qid=1461120859&sr=1-1&keywords=tshirts",
-                "title":"Change Specs"
+                "type":"postback",
+                "title":"Change Specs",
+                "payload":"10063"
               },
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"Buy now"
+                "payload":"10063"
               },
               {
                 "type":"postback",
                 "title":"View Details",
-                "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM100"
+                "payload":"10063"
               }              
             ]
           },
           {
             "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
-            "image_url":"http://ecx.images-amazon.com/images/I/4121Hb7NP7L._SL500_SX385_CR0,0,385,500_FMwebp_QL65_.jpg",
+            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0030_a_brown.jpg",
             "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
             "buttons":[
               {
-                "type":"web_url",
-                "url":"http://www.amazon.in/IZINC-Raglan-T-Shirt-IZINC-CREW-REGLAN-FULL-DARKGREY-S_Dark-Grey_Small/dp/B014IQNJ1I/ref=sr_1_2?s=apparel&ie=UTF8&qid=1461120859&sr=1-2&keywords=tshirts",
-                "title":"Change Specs"
+                "type":"postback",
+                "title":"Change Specs",
+                "payload":"10207"
               },
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"Buy Now"
+                "payload":"10207"
               },
               {
                 "type":"postback",
-                "title":"Bookmark Item",
-                "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM101"
+                "title":"View Details",
+                "payload":"10207"
+              }              
+            ]
+          },
+          {
+            "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
+            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0010_a_black.jpg",
+            "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
+            "buttons":[
+              {
+                "type":"postback",
+                "title":"Change Specs",
+                "payload":"10160"
+              },
+              {
+                "type":"postback",
+                "title":"Buy Now",
+                "payload":"10160"
+              },
+              {
+                "type":"postback",
+                "title":"View Details",
+                "payload":"10160"
+              }              
+            ]
+          },
+          {
+            "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
+            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0014_a_brown.jpg",
+            "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
+            "buttons":[
+              {
+                "type":"postback",
+                "title":"Change Specs",
+                "payload":"10184"
+              },
+              {
+                "type":"postback",
+                "title":"Buy Now",
+                "payload":"10184"
+              },
+              {
+                "type":"postback",
+                "title":"View Details",
+                "payload":"10184"
               }              
             ]
           }
