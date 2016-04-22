@@ -46,13 +46,20 @@ server.post('/webhook/', function (req, res) {
         delete sessions[sessionId];
       }else {
         const sessionId = findOrCreateSession(sender);
+        client.message(text, (error, data) => {
+          if (error) {
+            console.log('Oops! Got an error: ' + error);
+          } else {
+            console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+          }
+        });
         wit.runActions(sessionId, text, sessions[sessionId].context, (error, context) => {
           if (error) console.log(error);
         });
       }
     }
     if (event.postback) {
-    	text = JSON.stringify(event.postback.payload).replace('"','');
+    	text = JSON.stringify(event.postback.payload).replace('"','').replace('"','');
       console.log("product id that customer wants to buy = "+text);
       var catentryId = text.split(' ')[2];
       commerceUtility.loginUser(catentryId);
