@@ -52,7 +52,7 @@ server.post('/webhook/', function (req, res) {
       }
     }
     if (event.postback) {
-    	text = JSON.stringify(event.postback.payload);
+    	text = JSON.stringify(event.postback.payload).replace('"','');
       console.log("product id that customer wants to buy = "+text);
       var catentryId = text.split(' ')[2];
       commerceUtility.loginUser(catentryId);
