@@ -103,7 +103,7 @@ function sendTextMessage(sender, text) {
   });
 }
 
-function sendGenericMessage(sender) {
+function sendGenericMessage(sender, categoryId) {
    console.log('Send Generice Text Message');
   /*messageData = {
     "attachment": {
@@ -358,6 +358,14 @@ const actions = {
     if (emode) context.mode = emode;
     if(entities.product){
       var category = entities.product[0].value;
+      var categoryMap = {
+        "tops" : "10007",
+        "dresses" : "10006",
+        "shoes" : "10011",
+        "sweaters" : "10008",
+        "handbags" : "10012"
+      };
+      context.categoryId = categoryMap[category];
     }
     cb(context);
   },
@@ -372,7 +380,7 @@ const actions = {
     // Here should go the api call, e.g.:
     console.log("categoryId = %o",context.categoryId);
     const sender = sessions[sessionId].fbid;
-    sendGenericMessage(sender);
+    sendGenericMessage(sender, categoryId);
     cb(context);
   }, 
   sendReceipt: (sessionId, context, cb) => {
