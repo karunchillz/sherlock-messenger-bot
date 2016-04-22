@@ -40,7 +40,7 @@ module.exports.loginUser = function loginUser(catentryId) {
 };
 
 function addToCart(catentryId) {
-  console.log('addToCart '+WCToken,catentryId);
+  console.log('addToCart ',catentryId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart?responseFormat=json',
 	headers: {
@@ -61,7 +61,7 @@ function addToCart(catentryId) {
     }
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success addToCart');
+      console.log('Success addToCart',body);
       orderId = body.orderId;
       console.log('orderId ',orderId);
       applyCheckoutProfile();
