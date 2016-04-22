@@ -73,15 +73,9 @@ function getProducts(categoryId, sender){
     method: 'GET'
   }, function(error, response, body) {
     if (!error) {
-      console.log('Success getProducts');
+    console.log('Success getProducts');
 		var catentryArray = JSON.parse(body).CatalogEntryView;
-    console.log('recordSetTotal',catentryArray);
 		for (var i = 0; i < 5; i++) {
-      console.log('catentryArray[i].name'+catentryArray[i].name);
-      console.log('catentryArray[i].shortDescription'+catentryArray[i].shortDescription);
-      console.log('catentryArray[i].Price[0].priceValue'+catentryArray[i].Price[0].priceValue);
-      console.log('http://182.71.233.89'+catentryArray[i].thumbnail);
-      console.log('catentryArray[i].uniqueID'+catentryArray[i].uniqueID);
 			productsMap.push({
 				title : catentryArray[i].name,
 				subtitle : catentryArray[i].shortDescription,
