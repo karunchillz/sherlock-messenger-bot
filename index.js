@@ -52,7 +52,11 @@ server.post('/webhook/', function (req, res) {
     }
     if (event.postback) {
     	text = JSON.stringify(event.postback);
-    	sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
+    	const sessionId = findOrCreateSession(sender);
+        wit.runActions(sessionId, text, sessions[sessionId].context, (error, context) => {
+          if (error) console.log(error);
+        });
+      //sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token);
     	continue;
     }  
   }
