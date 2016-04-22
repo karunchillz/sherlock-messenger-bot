@@ -13,7 +13,7 @@ module.exports.productId = productId;
 module.exports.productsMap = productsMap;
 
 // Login User
-module.exports.loginUser = function loginUser(catentryId,categoryId) {
+module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
   console.log('loginUser ',catentryId);
 
   var body = {
@@ -35,7 +35,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId) {
 	      WCToken = body.WCToken;
 	      console.log('WCToken ',WCToken);
 	      if(catentryId == ''){
-    		getProducts(categoryId);
+    		getProducts(categoryId, sender);
 	      }else{
 	      	productId = catentryId;
 	      	addToCart(catentryId);
@@ -47,7 +47,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId) {
   }else{
   	console.log('Else ');
     if(catentryId == ''){
-    	getProducts(categoryId);
+    	getProducts(categoryId, sender);
     }else{
       productId = catentryId;
   	  addToCart(catentryId);
@@ -57,9 +57,11 @@ module.exports.loginUser = function loginUser(catentryId,categoryId) {
 };
 
 //Get Category
-function getProducts(categoryId){
+function getProducts(categoryId, sender){
 
-  console.log('getCategory ',categoryId);
+  console.log('getCategory '+categoryId);
+  console.log('sender id '+sender);
+
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/productview/byCategory/'+categoryId,
 	headers: {
@@ -81,6 +83,7 @@ function getProducts(categoryId){
 			});
 		}
 		console.log('productsMap '+productsMap);
+    sendGenericMessage(sender);
     } else {
       console.log('Error sending message: ', error);
     }
@@ -191,4 +194,27 @@ function checkout() {
       console.log('Error sending message: ', error);
     }
   });
+}
+
+function sendGenericMessage(sender) {
+  
+  console.log('Send Generice Text Message');
+  
+  console.log("products = %o",commerceUtility.productsMap);
+
+  /*request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });*/
 }

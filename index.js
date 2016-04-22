@@ -103,158 +103,9 @@ function sendTextMessage(sender, text) {
   });
 }
 
-function sendGenericMessage(sender) {
-   console.log('Send Generice Text Message');
 
-  /*messageData = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "First card",
-          "subtitle": "Element #1 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-          "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com/",
-            "title": "Web url"
-          }, {
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for first element in a generic bubble",
-          }],
-        },{
-          "title": "Second card",
-          "subtitle": "Element #2 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-          "buttons": [{
-            "type": "postback",
-            "title": "Postback",
-            "payload": "Payload for second element in a generic bubble",
-          }],
-        }]
-      }
-    }
-  };*/
 
-  /*messageData = {
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-          {
-            "title":"Modern Half Sleeve T-Shirt (Amazon)",
-            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0015_a_teal.jpg",
-            "subtitle":"Versatil Empire Waist Sundress \n $100.00",
-            "buttons":[
-              {
-                "type":"postback",
-                "title":"Change Specs",
-                "payload":"10063"
-              },
-              {
-                "type":"postback",
-                "title":"Buy Now",
-                "payload":"Buy now 10063"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"10063"
-              }              
-            ]
-          },
-          {
-            "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
-            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0030_a_brown.jpg",
-            "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
-            "buttons":[
-              {
-                "type":"postback",
-                "title":"Change Specs",
-                "payload":"10207"
-              },
-              {
-                "type":"postback",
-                "title":"Buy Now",
-                "payload":"Buy now 10207"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"10207"
-              }              
-            ]
-          },
-          {
-            "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
-            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0010_a_black.jpg",
-            "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
-            "buttons":[
-              {
-                "type":"postback",
-                "title":"Change Specs",
-                "payload":"10160"
-              },
-              {
-                "type":"postback",
-                "title":"Buy Now",
-                "payload":"Buy now 10160"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"10160"
-              }              
-            ]
-          },
-          {
-            "title":"Classic Grey Full Sleeve T-Shirt (Amazon)",
-            "image_url":"http://182.71.233.89/wcsstore/ExtendedSitesCatalogAssetStore/images/catalog/apparel/women/wcl000_dresses/200x310/wcl000_0014_a_brown.jpg",
-            "subtitle":"IZINC Men's Raglan Neck Full Sleeve Cotton T-Shirt",
-            "buttons":[
-              {
-                "type":"postback",
-                "title":"Change Specs",
-                "payload":"10184"
-              },
-              {
-                "type":"postback",
-                "title":"Buy Now",
-                "payload":"Buy now 10184"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"10184"
-              }              
-            ]
-          }
-        ]
-      }
-    }
-  };*/
 
-  console.log("products = %o",commerceUtility.productsMap);
-
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    }
-  });
-}
 
 function sendReceiptTemplate(sender){
   messageData = {
@@ -382,10 +233,9 @@ const actions = {
   sendDresses: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
     console.log("categoryId = %o",context.categoryId);
-    commerceUtility.loginUser('',context.categoryId);
     const sender = sessions[sessionId].fbid;
+    commerceUtility.loginUser('',context.categoryId,sender);
     console.log("sender = %o",sender);
-    sendGenericMessage(sender);
     cb(context);
   }, 
   sendReceipt: (sessionId, context, cb) => {
