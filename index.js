@@ -380,7 +380,8 @@ const actions = {
     // Here should go the api call, e.g.:
     console.log("categoryId = %o",context.categoryId);
     const sender = sessions[sessionId].fbid;
-    sendGenericMessage(sender, categoryId);
+    console.log("sender = %o",sender);
+    sendGenericMessage(sender, context.categoryId);
     cb(context);
   }, 
   sendReceipt: (sessionId, context, cb) => {
