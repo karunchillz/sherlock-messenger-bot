@@ -12,7 +12,8 @@
   "dependencies": {
     "restify": "*",
     "request": "*",
-    "node-uuid": "*"
+    "node-uuid": "*",
+    "node-wit":"*"
   },
   "keywords": [
     "node",

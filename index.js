@@ -140,7 +140,7 @@ function sendGenericMessage(sender) {
 
 const WIT_TOKEN = "KMG23FM4RVSUDOUJ2FB3V4GYZJADLIRJ";
 
-const Wit = require('wit').Wit;
+const Wit = require('node-wit').Wit;
 const uuid = require('node-uuid');
 
 const HERE = {
@@ -156,7 +156,7 @@ const currentLocation = { //Fort Mason
 const sessions = {};
 
 const actions = {
-  say: (sessionId, msg, cb) => {
+  say: (sessionId,context, msg, cb) => {
     const recipient = sessions[sessionId].fbid;
     if (recipient) {
       sendTextMessage(recipient, msg); 
@@ -165,21 +165,21 @@ const actions = {
       cb();
     }
   },
-  merge: (context, entities, cb) => {
+  merge: (sessionId, context, entities, message, cb) => {
     const elocation = firstEntityValue(entities, 'location');
     const emode = firstEntityValue(entities, 'mode');
     if (elocation) context.location = elocation;
     if (emode) context.mode = emode;
     cb(context);
   },
-  fetchTraffic: (context, cb) => {
+  fetchTraffic: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
     getTraffic(context.location,context.mode,(time,error) => {
       context.travel_time = time;
       cb(context);
     });
   },
-  error: (sessionId, msg) => {
+  error: (sessionId, context, msg) => {
     const recipient = sessions[sessionId].fbid;
     if (recipient) {
       sendTextMessage(recipient, 'Oops, I don\'t know what to do.');
