@@ -55,11 +55,7 @@ server.post('/webhook/', function (req, res) {
     	text = JSON.stringify(event.postback);
       console.log("product id that customer wants to buy = "+text);
       var catentryId = text.split(' ')[2];
-      commerceUtility.loginUser();
-      commerceUtility.addToCart(catentryId);
-      commerceUtility.applyCheckoutProfile();
-      commerceUtility.preCheckout();
-      commerceUtility.checkout();
+      commerceUtility.loginUser(catentryId);
       const session_id = findOrCreateSession(sender);
       wit.runActions(session_id, text, sessions[session_id].context, (error, context) => {
           if (error) console.log(error);

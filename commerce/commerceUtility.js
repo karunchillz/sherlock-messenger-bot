@@ -8,12 +8,10 @@ var orderId = '';
 module.exports.loginUser = function loginUser() {
   console.log('loginUser');
 
-  var form = {
-    logonId: 'testing10@a.com',
-    logonPassword: 'testing10'
+  var body = {
+	"logonId": "testing10@a.com",
+	"logonPassword": "testing10"
   };
-
-  var formData = querystring.stringify(form);
 
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/loginidentity',
@@ -21,19 +19,19 @@ module.exports.loginUser = function loginUser() {
       'Content-Type': 'application/json'
     },    
     method: 'POST',
-    body: formData
+    json: body
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
       WCToken = response.WCToken;
+      addToCart(catentryId);
     } else {
       console.log('Error sending message: ', error);
     }
   });
 };
 
-// Add to Cart
-module.exports.addToCart = function addToCart(catentryId) {
+function addToCart(catentryId) {
   console.log('addToCart '+WCToken,catentryId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart?responseFormat=json',
@@ -42,7 +40,7 @@ module.exports.addToCart = function addToCart(catentryId) {
       'WCToken': WCToken
     },    
     method: 'POST',
-    body: {
+    json: {
 		"orderId": ".",
 		"orderItem": [
 		{
@@ -57,14 +55,14 @@ module.exports.addToCart = function addToCart(catentryId) {
     if (!error) {
       console.log('Success sending message: ', response);
       orderId = response.orderId;
+      applyCheckoutProfile();
     } else {
       console.log('Error sending message: ', error);
     }
   });
-};
+}
 
-// Apply Checkout Profile
-module.exports.applyCheckoutProfile = function applyCheckoutProfile() {
+function applyCheckoutProfile() {
   console.log('applyCheckoutProfile ',orderId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart/@self/applyCheckoutProfile',
@@ -73,20 +71,20 @@ module.exports.applyCheckoutProfile = function applyCheckoutProfile() {
       'WCToken': WCToken
     },    
     method: 'PUT',
-    body: {
+    json: {
 		"orderId": orderId
     }
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
+      preCheckout();
     } else {
       console.log('Error sending message: ', error);
     }
   });
-};
+}
 
-// Pre Checkout
-module.exports.preCheckout = function preCheckout() {
+function preCheckout() {
   console.log('preCheckout ',orderId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart/@self/precheckout',
@@ -95,20 +93,20 @@ module.exports.preCheckout = function preCheckout() {
       'WCToken': WCToken
     },    
     method: 'PUT',
-    body: {
+    json: {
 		"orderId": orderId
     }
   }, function(error, response, body) {
     if (!error) {
       console.log('Success sending message: ', response);
+      checkout();
     } else {
       console.log('Error sending message: ', error);
     }
   });
-};
+}
 
-// Checkout
-module.exports.checkout = function checkout() {
+function checkout() {
   console.log('checkout ',orderId);
   request({
     url: 'http://182.71.233.89/wcs/resources/store/10851/cart/@self/checkout?responseFormat=json',
@@ -117,7 +115,7 @@ module.exports.checkout = function checkout() {
       'WCToken': WCToken
     },    
     method: 'POST',
-    body: {
+    json: {
 		"catalogId": "10052",
 		"langId": "-1",
 		"notifyMerchant": "1",
@@ -135,4 +133,4 @@ module.exports.checkout = function checkout() {
       console.log('Error sending message: ', error);
     }
   });
-};
+}
