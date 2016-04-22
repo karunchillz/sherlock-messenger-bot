@@ -46,13 +46,13 @@ server.post('/webhook/', function (req, res) {
         delete sessions[sessionId];
       }else {
         const sessionId = findOrCreateSession(sender);
-        client.message(text, (error, data) => {
+        /*client.message(text, (error, data) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
             console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
           }
-        });
+        });*/
         wit.runActions(sessionId, text, sessions[sessionId].context, (error, context) => {
           if (error) console.log(error);
         });
@@ -351,10 +351,12 @@ const actions = {
     }
   },
   merge: (sessionId, context, entities, message, cb) => {
+    console.log("entities merge = %o",entities);
     const elocation = firstEntityValue(entities, 'location');
     const emode = firstEntityValue(entities, 'mode');
     if (elocation) context.location = elocation;
     if (emode) context.mode = emode;
+    context.categoryId = "10045";
     cb(context);
   },
   fetchTraffic: (sessionId, context, cb) => {
@@ -366,7 +368,7 @@ const actions = {
   },
   sendDresses: (sessionId, context, cb) => {
     // Here should go the api call, e.g.:
-    console.log("context = %o",context);
+    console.log("categoryId = %o",context.categoryId);
     const sender = sessions[sessionId].fbid;
     sendGenericMessage(sender);
     cb(context);

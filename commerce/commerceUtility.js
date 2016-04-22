@@ -4,6 +4,7 @@ var querystring = require('querystring');
 var WCToken = '';
 var orderId = '';
 
+module.exports.orderId = orderId;
 // Login User
 module.exports.loginUser = function loginUser(catentryId) {
   console.log('loginUser ',catentryId);
