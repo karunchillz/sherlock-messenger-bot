@@ -16,7 +16,7 @@ server.get('/webhook/', function (req, res) {
 });
 
 server.post('/webhook/', function (req, res) {
-  console.log('POST /webhook/');
+  console.log('Inside POST /webhook/');
   messaging_events = req.body.entry[0].messaging;
   console.log('req body '+JSON.stringify(req.body));
   for (j = 0; j < messaging_events.length; j++) {
@@ -163,77 +163,11 @@ function sendGenericMessage(sender) {
               {
                 "type":"postback",
                 "title":"Buy Now",
-                "payload":"I go with Classic Grey Full Sleeve T-Shirt (Amazon)"
+                "payload":"Buy Now"
               },
               {
                 "type":"postback",
                 "title":"Bookmark Item",
-                "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM101"
-              }              
-            ]
-          },
-          {
-            "title":"Modern V-Neck T-Shirt (Flipkart)",
-            "image_url":"http://img6a.flixcart.com/image/t-shirt/z/g/m/gsfsombvnecktrq-gritstones-xl-275x340-imaefss4hfczwufu.jpeg",
-            "subtitle":"Gritstones Embroidered Men's V-neck T-Shirt",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"http://www.flipkart.com/gritstones-embroidered-men-s-v-neck-t-shirt/p/itmeft4p7xwcyggy?pid=TSHEFT4PKVWCPZGM&al=iJQCW5O19RcqrGXLhbFpJsldugMWZuE7wkNiXfq8GiSc7kMPf7HgiDGOi3fPKhGHSOkkq9GA2zo%3D&ref=L%3A6930538169159731935&srno=p_2&query=t+shirts&otracker=from-search",
-                "title":"Change Specs"
-              },
-              {
-                "type":"postback",
-                "title":"Buy Now",
-                "payload":"I go with Modern V-Neck T-Shirt (Flipkart)"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM100"
-              }              
-            ]
-          },
-          {
-            "title":"Polo T-Shirt (Flipkart)",
-            "image_url":"http://img5a.flixcart.com/image/t-shirt/j/d/9/15a3ap7j2003i903-united-colors-of-benetton-m-275x340-imaehgzrhrhjpcvg.jpeg",
-            "subtitle":"United Colors of Benetton Striped Men's Polo T-Shirt",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"http://www.flipkart.com/united-colors-benetton-striped-men-s-polo-t-shirt/p/itmeej2h7yje2uhg?pid=TSHED54QCNGCTJ2G&al=iJQCW5O19RcqrGXLhbFpJsldugMWZuE7wkNiXfq8GiQDodz58hCBE8VqAXQnrnxf%2BXwtgldzt2o%3D&ref=L%3A6930538169159731935&srno=p_1&query=t+shirts&otracker=from-search",
-                "title":"Change Specs"
-              },
-              {
-                "type":"postback",
-                "url":"http://www.flipkart.com/united-colors-benetton-striped-men-s-polo-t-shirt/p/itmeej2h7yje2uhg?pid=TSHED54QCNGCTJ2G&al=iJQCW5O19RcqrGXLhbFpJsldugMWZuE7wkNiXfq8GiQDodz58hCBE8VqAXQnrnxf%2BXwtgldzt2o%3D&ref=L%3A6930538169159731935&srno=p_1&query=t+shirts&otracker=from-search",
-                "title":"Buy Now"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
-                "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM101"
-              }              
-            ]
-          },
-          {
-            "title":"Black Nike T-Shirt (Jabong)",
-            "image_url":"http://static4.jassets.com/p/Nike-As-Legend-2.0-Ss-Black-Round-Neck-T-Shirt-3687-3780681-1-catalog_s.jpg",
-            "subtitle":"NIKE As Legend 2.0 Ss Black Round Neck T-Shirt",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"http://www.jabong.com/Nike-As-Legend-2-0-Ss-Black-Round-Neck-T-Shirt-1860873.html?pos=1",
-                "title":"Change Specs"
-              },
-              {
-                "type":"web_url",
-                "url":"http://www.jabong.com/Nike-As-Legend-2-0-Ss-Black-Round-Neck-T-Shirt-1860873.html?pos=1",
-                "title":"Buy Now"
-              },
-              {
-                "type":"postback",
-                "title":"View Details",
                 "payload":"USER_DEFINED_PAYLOAD_FOR_ITEM101"
               }              
             ]
