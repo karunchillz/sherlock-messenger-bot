@@ -5,31 +5,38 @@ var WCToken = '';
 var orderId = '';
 
 // Login User
-module.exports.loginUser = function loginUser() {
-  console.log('loginUser');
+module.exports.loginUser = function loginUser(catentryId) {
+  console.log('loginUser ',catentryId);
 
   var body = {
 	"logonId": "testing10@a.com",
 	"logonPassword": "testing10"
   };
 
-  request({
-    url: 'http://182.71.233.89/wcs/resources/store/10851/loginidentity',
-	headers: {
-      'Content-Type': 'application/json'
-    },    
-    method: 'POST',
-    json: body
-  }, function(error, response, body) {
-    if (!error) {
-      console.log('Success loginUser ',body);
-      WCToken = response.WCToken;
-      console.log('WCToken ',WCToken);
-      addToCart(catentryId);
-    } else {
-      console.log('Error sending message: ', error);
-    }
-  });
+  if(WCToken == ''){
+	  request({
+	    url: 'http://182.71.233.89/wcs/resources/store/10851/loginidentity',
+		headers: {
+	      'Content-Type': 'application/json'
+	    },    
+	    method: 'POST',
+	    json: body
+	  }, function(error, response, body) {
+	    if (!error) {
+	      console.log('Success loginUser ');
+	      WCToken = body.WCToken;
+	      console.log('WCToken ',WCToken);
+	      addToCart(catentryId);
+	    } else {
+	      console.log('Error sending message: ', error);
+	    }
+	  });
+  }else{
+  	console.log('Else ');
+  	addToCart(catentryId);
+  }
+
+
 };
 
 function addToCart(catentryId) {
@@ -55,7 +62,7 @@ function addToCart(catentryId) {
   }, function(error, response, body) {
     if (!error) {
       console.log('Success addToCart');
-      orderId = response.orderId;
+      orderId = body.orderId;
       console.log('orderId ',orderId);
       applyCheckoutProfile();
     } else {
