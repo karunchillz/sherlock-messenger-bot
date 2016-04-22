@@ -266,7 +266,7 @@ function sendReceiptTemplate(){
           "subtotal": product.price,
           "shipping_cost": 4.95,
           "total_tax": 6.19,
-          "total_cost": parseFloat(product.price) + 11.14
+          "total_cost": parseFloat(product.price) + 11.14 - 30
         },
         "adjustments": [{
           "name": "New Customer Discount",
