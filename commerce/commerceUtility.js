@@ -6,6 +6,7 @@ var token = 'CAAO6UiNCn1MBACFaHgqZCnYMNhfkrBL5uFm16rZBBxtcNlw1j5kZA15yWab5TStnqo
 var WCToken = '';
 var orderId = '';
 var productId = '';
+var skuId = '';
 var productsMap = [];
 
 module.exports.orderId = orderId;
@@ -40,7 +41,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
     		getProducts(categoryId, sender);
 	      }else{
 	      	productId = catentryId;
-	      	addToCart(catentryId);
+          getSkuFromParent(catentryId);
 	      }
 	    } else {
 	      console.log('Error sending message: ', error);
@@ -52,7 +53,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
     	getProducts(categoryId, sender);
     }else{
       productId = catentryId;
-  	  addToCart(catentryId);
+  	  getSkuFromParent(catentryId);
     }
   }
 
@@ -75,6 +76,7 @@ function getProducts(categoryId, sender){
     if (!error) {
     console.log('Success getProducts');
 		var catentryArray = JSON.parse(body).CatalogEntryView;
+    productsMap = [];
 		for (var i = 0; i < 5; i++) {
 			productsMap.push({
 				title : catentryArray[i].name,
@@ -91,7 +93,31 @@ function getProducts(categoryId, sender){
     }
   });	
 	
-};
+}
+
+function getSkuFromParent(parentCatentryId){
+
+  console.log('getSkuFromParent '+parentCatentryId);
+
+  request({
+    url: 'http://182.71.233.89/wcs/resources/store/10851/productview/byId/'+parentCatentryId,
+    headers: {
+      'Content-Type': 'application/json',
+      'WCToken': WCToken
+    },
+    method: 'GET'
+  }, function(error, response, body) {
+    if (!error) {
+    console.log('Success getSkuFromParent');
+    skuId = JSON.parse(body).CatalogEntryView[0].SKUs[0].SKUUniqueID;
+    console.log('skuId '+skuId);
+    addToCart(skuId);
+    } else {
+      console.log('Error sending message: ', error);
+    }
+  }); 
+
+}
 
 function addToCart(catentryId) {
   console.log('addToCart ',catentryId);
