@@ -1,5 +1,7 @@
 var request = require('request');
 var querystring = require('querystring');
+var token = 'CAAO6UiNCn1MBACFaHgqZCnYMNhfkrBL5uFm16rZBBxtcNlw1j5kZA15yWab5TStnqoLnNNGkqsUrhv7FmPeoCUTA0l8dhZCc0oE4pRU2iKBdG0d3qcxUVeX1biRbhxLbtEi9Hh2DQ40wh2eBGQ4VcSZAmvhRLiMNkBkwusrNcqa6XeYzGAdPxMkWp4BWY9CIZD';
+
 
 var WCToken = '';
 var orderId = '';
@@ -72,7 +74,7 @@ function getProducts(categoryId, sender){
   }, function(error, response, body) {
     if (!error) {
       console.log('Success getProducts');
-		var catentryArray = JSON.parse(body).recordSetTotal;
+		var catentryArray = JSON.parse(body).CatalogEntryView;
     console.log('recordSetTotal',catentryArray);
 		for (var i = 0; i < 5; i++) {
       console.log('catentryArray[i].name'+catentryArray[i].name);
@@ -206,9 +208,43 @@ function sendGenericMessage(sender) {
   
   console.log('Send Generice Text Message');
   
-  console.log("products = %o",commerceUtility.productsMap);
+  console.log("products = %o",productsMap);
 
-  /*request({
+  for(i=0;i<5;i++){
+    var messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+
+            "title": productsMap[i].title,
+            "subtitle": productsMap[i].subtitle + "\n Price : $" + productsMap[i].price ,
+            "image_url": "",
+            "buttons":[
+                {
+                  "type":"postback",
+                  "title":"Change Specs",
+                  "payload":""+productsMap[i].id
+                },
+                {
+                  "type":"postback",
+                  "title":"Buy Now",
+                  "payload":"Buy now "+productsMap[i].id
+                },
+                {
+                  "type":"postback",
+                  "title":"View Details",
+                  "payload":""+productsMap[i].id
+                }              
+            ]
+          }]
+        }
+      }
+    };
+  }
+
+  request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
     method: 'POST',
@@ -222,5 +258,5 @@ function sendGenericMessage(sender) {
     } else if (response.body.error) {
       console.log('Error: ', response.body.error);
     }
-  });*/
+  });
 }
