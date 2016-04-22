@@ -386,6 +386,7 @@ const actions = {
 };
 
 const wit = new Wit(WIT_TOKEN, actions);
+const client = new Wit(WIT_TOKEN, actions);
 
 const findOrCreateSession = (fbid) => {
   var sessionId;
