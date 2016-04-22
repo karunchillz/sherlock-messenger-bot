@@ -356,7 +356,9 @@ const actions = {
     const emode = firstEntityValue(entities, 'mode');
     if (elocation) context.location = elocation;
     if (emode) context.mode = emode;
-    context.categoryId = "10045";
+    if(entities.product){
+      var category = entities.product[0].value;
+    }
     cb(context);
   },
   fetchTraffic: (sessionId, context, cb) => {
