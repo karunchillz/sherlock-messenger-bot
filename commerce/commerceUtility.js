@@ -223,8 +223,8 @@ function sendGenericMessage(sender) {
   for(var i=0; i<5; i++){
     var item = {
       "title": productsMap[i].title,
-      "subtitle": productsMap[i].subtitle + "\n Price : $" + productsMap[i].price ,
-      "image_url": "",
+      "subtitle": "Price : $" + productsMap[i].price + " | " + productsMap[i].subtitle,
+      "image_url": productsMap[i].image,
       "buttons":[
           {
             "type":"postback",
