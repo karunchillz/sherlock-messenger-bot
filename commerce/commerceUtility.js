@@ -51,13 +51,13 @@ function addToCart(catentryId) {
     json: {
 		"orderId": ".",
 		"orderItem": [
-		{
-			"productId": catentryId,
-			"quantity": "1"
-		}
-	],
-	"x_calculateOrder": "0",
-	"x_inventoryValidation": "true"
+			{
+				"productId": catentryId,
+				"quantity": "1"
+			}
+		],
+		"x_calculateOrder": "0",
+		"x_inventoryValidation": "true"
     }
   }, function(error, response, body) {
     if (!error) {
