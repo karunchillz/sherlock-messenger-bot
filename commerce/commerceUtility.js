@@ -37,7 +37,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
 	  }, function(error, response, body) {
 	    if (!error) {
 	      console.log('Success loginUser ');
-	      WCToken = bo\dy.WCToken;
+	      WCToken = body.WCToken;
 	      console.log('WCToken ',WCToken);
 	      if(catentryId == ''){
     		getProducts(categoryId, sender);
