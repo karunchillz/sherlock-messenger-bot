@@ -25,6 +25,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
 	"logonPassword": "testing10"
   };
 
+ 
   if(WCToken == ''){
 	  request({
 	    url: 'http://182.71.233.89/wcs/resources/store/10851/loginidentity',
@@ -36,7 +37,7 @@ module.exports.loginUser = function loginUser(catentryId,categoryId,sender) {
 	  }, function(error, response, body) {
 	    if (!error) {
 	      console.log('Success loginUser ');
-	      WCToken = body.WCToken;
+	      WCToken = bo\dy.WCToken;
 	      console.log('WCToken ',WCToken);
 	      if(catentryId == ''){
     		getProducts(categoryId, sender);
