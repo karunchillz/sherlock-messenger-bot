@@ -51,6 +51,7 @@ server.post('/webhook/', function (req, res) {
             console.log('Oops! Got an error: ' + error);
           } else {
             console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+            
           }
         });*/
         wit.runActions(sessionId, text, sessions[sessionId].context, (error, context) => {

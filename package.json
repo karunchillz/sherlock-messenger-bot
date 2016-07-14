@@ -1,7 +1,7 @@
 {
-  "name": "fb-bot-getting-started",
+  "name": "Sherlock Messenger Bot",
   "version": "0.0.1",
-  "description": "A sample Node.js app using Restify for FB Bot",
+  "description": "Enjoy the instant shopping experience from your favorite facebook messenger.",
   "engines": {
     "node": "*"
   },
