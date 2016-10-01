@@ -3,8 +3,7 @@ var request = require('request');
 var server = restify.createServer();
 var commerceUtility = require('./commerce/commerceUtility');
 
-var token = 'CAAO6UiNCn1MBACFaHgqZCnYMNhfkrBL5uFm16rZBBxtcNlw1j5kZA15yWab5TStnqoLnNNGkqsUrhv7FmPeoCUTA0l8dhZCc0oE4pRU2iKBdG0d3qcxUVeX1biRbhxLbtEi9Hh2DQ40wh2eBGQ4VcSZAmvhRLiMNkBkwusrNcqa6XeYzGAdPxMkWp4BWY9CIZD';
-//var token = "CAAInkXlV7uwBAEkeVh9pY6JrMXipvTXVOrP2GO7tdi0SLO8VaXvfgnyBuKSOoVzTd93HacICtwJZCbFD8x6WRQUsvOdf0m3ZC5j5o2wk9dMtoy8WRK6ZBzrajspAsyq3fFku1FH324R4SIwqL3fH5iZCGqjDAZCvHbsdxU4qrPfLnIwMnQUp3BfO0rR8c85S8obaUdtNVPgZDZD";
+var token = '';
 
 server.use(restify.bodyParser());
 
@@ -178,14 +177,13 @@ function sendReceiptTemplate(sender){
 
 }
 
-//const WIT_TOKEN = "KMG23FM4RVSUDOUJ2FB3V4GYZJADLIRJ";
-const WIT_TOKEN = "S7YRFBMNSY6JEJJTKO2EJKZ4SFJBQ4VT";
+const WIT_TOKEN = "";
 const Wit = require('node-wit').Wit;
 const uuid = require('node-uuid');
 
 const HERE = {
-  id:"xqatBOxmf61Jv8AzLoS9",
-  code: "EopBF0eLNTAcVNzo297DDA",
+  id:"",
+  code: "",
 }
 
 const currentLocation = { //Fort Mason
